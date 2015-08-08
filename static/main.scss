@@ -1,0 +1,78 @@
+//colors
+$color_boston_blue_approx: #2980b9;
+$color_pickled_bluewood_approx: #2c3e50;
+$color_athens_gray_approx: #ecf0f1;
+
+//fonts
+$font_0: Noto Sans Japanese;
+$font_1: Meiryo;
+$font_2: sans-serif;
+
+//urls
+$url_0: url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+$url_1: url(http://fonts.googleapis.com/css?family=Roboto:900,400);
+$url_2: url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+@import $url_0;
+@import $url_1;
+@import $url_2;
+pre {
+	height: 450px;
+	overflow: scroll;
+	width: 720px;
+	code {
+		background: $color_boston_blue_approx;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 6px;
+		display: block;
+		font-size: 11px;
+		padding: .5em;
+	}
+}
+body {
+	background: $color_pickled_bluewood_approx;
+	color: $color_boston_blue_approx;
+	font-family: $font_0, $font_1, $font_2;
+	font-size: 19px;
+	font-size: 26px;
+	font-weight: normal;
+	letter-spacing: .08em;
+	overflow: hidden;
+}
+html {
+	background: $color_pickled_bluewood_approx;
+	font-family: $font_0, $font_1, $font_2;
+	font-size: 26px;
+	overflow: hidden;
+}
+.remark-position {
+	bottom: 30px;
+	color: $color_pickled_bluewood_approx;
+	font-size: 12px;
+	right: 30px;
+}
+a {
+	color: $color_pickled_bluewood_approx;
+	text-decoration: 1px dotted $color_athens_gray_approx;
+}
+h1 {
+	color: $color_pickled_bluewood_approx;
+	font-family: $font_0, $font_1, $font_2;
+	font-size: 30px;
+	font-weight: $color_pickled_bluewood_approx;
+	letter-spacing: .07em;
+	line-height: 1.1em;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	text-transform: uppercase;
+}
+h2 {
+	color: $color_boston_blue_approx;
+	font-family: $font_0, $font_1, $font_2;
+	font-size: 40px;
+	font-weight: $color_pickled_bluewood_approx;
+}
+h3 {
+	font-family: $font_0, $font_1, $font_2;
+	font-weight: $color_pickled_bluewood_approx;
+}
