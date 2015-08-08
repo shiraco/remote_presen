@@ -1,18 +1,15 @@
 language:
-  - python
+- python
 
 python:
-  - 3.4
-
-env:
-  global:
-    secure: RJxnEhar0vjdUXWSnX+HRRV+2sgMTbeAUfAL+b6LcAZkRUidAq5Q9MDfWv+sEvD01/NYZSAChsUrAWEtV+bc47PZTQcrIh0ZK65i2qwVeicObiFylxGL61DScpX9T10OR6mkuoLRV2Dx/sHU1NGXAIfysADqVrp6902OArvuinRtyVy+E/UY/d5KG4Ht5oROhSj/OCe+crcMNcWPIDe47/H/vDRV6hRFUdw1U931bt25kVVSkBwt0csFYWZxgSbniWQgaS6huhZR4K/HuNwgPEOaOJNbHh/Snv6ll/Wvoj4BD+kefic0qsaQ2W9HBcIjS5XyHZ8ls2CfILfyPXg9ChbbRyFu5NKaHESx30l7tSP/asVxM/JfAbbbGB1/MLX+dqF7XWnlXCmx2w+fj/bTDV8CLCBKRotTQqpZJ8oCgixnieyKxH2tKSmiiFcBUxrgb7SN46+kh/zFWXBf88P4HiZJgzSksKjIs5sybhlhbYLGQ2VE6S/rGKFw7F6vyzdrTKLQMAHoal5oos48qoynTNVQLnry856BxXyoxQIQK9bvhmibn3wSNfS2tDHRzrJyVwjVvCOJv2Xu/SZZGQykeBLEnuwMykX7INYd+A24SeaWgAHvUFthk5Fg2SO+pugZCacqCfTIX1+34+i6wwyyBGpjSov0wfcYqyaolL//EFk=
+- 3.4
 
 install:
-  - pip install -r requirements.txt
+- pip install -r requirements.txt
 
 script:
-  - nosetests -v
+- nosetests -v
 
 notifications:
-  slack: ${SLACK_KEY}
+  slack:
+    secure: mlS3LHAXSMeAsP/nOror1z102hJK668W+gUGqE0EeQgPL4ue7uHYHuwM6iDeqSEh//tQOuGb7iCKt7rlevz529Xv17+Ysm/H7A2EOMs32dtqJva0Y6kvf8lbEfjZUJCBdHDMI66DX6ECzwpqNR8qvjf/HElAsGUIvZmHsLTzdM8FIVnQMSTGYAtFB3Sy7xtRP0/4JD54/jd0dQnrFJc9OAWwMxX348JA5jKUhFqgJrHYX764D+mY7rWRlgjdEKa28BTQHQDbGXK3OO0Q7Mp3xknkmIVFsE3nfcDoRuy5+D1xI61EfB/yUy2pQ3N1F2GYrAP/qYgs2SzfPS9u12VTE2j8s6oB2S4j9B+bEH8F3QRYJQwvmAdRvWV4Pz73eyrdji4HbebYlH/wd1DgRNk7djDPEUYqyt0ThSn9KwuqfsK994dSj43S6lQllSuvdDtlWhz4UWNcF3RUN43HVqETEktveowYHaGkQFGX54XSqieeiBehCnpOrEShaMZ5CABLQJX0S7YB7qPpP2d82zbqByd6fTTkA14jOOOP75iuKHgklnEP29800vDAsBf9oNXPTm6xqYAYgpp+60re9MOOvLe0nP2MJDh57xywhiOKBS9iwcMBYpeE4nuQt3QRixM0wlzKk7gQ7hdmR9QW1ICr01qPjTwpIZ3pWkLpGvxKoPs=
