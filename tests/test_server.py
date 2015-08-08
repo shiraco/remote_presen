@@ -28,3 +28,11 @@ class TestSlideHandler(BaseTestCase):
         response = self.fetch("/?{}".format(urllib.parse.urlencode(params)),
                               method="GET")
         self.assertEqual(response.code, 200)
+
+
+class TestRemoteHandler(BaseTestCase):
+    def test_get(self):
+        params = {}
+        response = self.fetch("/remote?{}".format(urllib.parse.urlencode(params)),
+                              method="GET")
+        self.assertEqual(response.code, 200)

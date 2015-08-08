@@ -13,10 +13,16 @@ class SlideHandler(tornado.web.RequestHandler):
         self.render("slide.html")
 
 
+class RemoteHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("remote.html")
+
+
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", SlideHandler),
+            (r"/remote", RemoteHandler),
         ]
         settings = dict(
             cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
