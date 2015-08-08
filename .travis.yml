@@ -1,0 +1,14 @@
+language:
+  - python
+
+python:
+  - 3.4
+
+install:
+  - "pip install -r requirements.txt"
+
+script:
+  - "nosetests -v"
+
+notifications:
+  slack: shiraco:c0bbZXum5ZgJWORGvxMXf9jD
