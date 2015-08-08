@@ -7,8 +7,6 @@ import tornado.options
 import tornado.web
 from tornado.options import define, options
 
-define("port", default=3000, help="run on the given port", type=int)
-
 
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
@@ -32,6 +30,7 @@ class Application(tornado.web.Application):
 def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
+    port = int(os.environ.get("PORT", 5000))
     http_server.listen(options.port)
     tornado.ioloop.IOLoop.current().start()
 
