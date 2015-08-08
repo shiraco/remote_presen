@@ -11,4 +11,4 @@ script:
   - "nosetests -v"
 
 notifications:
-  slack: $SLACK_KEY
+  slack: ${SLACK_KEY}
