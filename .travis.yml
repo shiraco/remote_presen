@@ -4,11 +4,15 @@ language:
 python:
   - 3.4
 
+env:
+  global:
+    secure: RJxnEhar0vjdUXWSnX+HRRV+2sgMTbeAUfAL+b6LcAZkRUidAq5Q9MDfWv+sEvD01/NYZSAChsUrAWEtV+bc47PZTQcrIh0ZK65i2qwVeicObiFylxGL61DScpX9T10OR6mkuoLRV2Dx/sHU1NGXAIfysADqVrp6902OArvuinRtyVy+E/UY/d5KG4Ht5oROhSj/OCe+crcMNcWPIDe47/H/vDRV6hRFUdw1U931bt25kVVSkBwt0csFYWZxgSbniWQgaS6huhZR4K/HuNwgPEOaOJNbHh/Snv6ll/Wvoj4BD+kefic0qsaQ2W9HBcIjS5XyHZ8ls2CfILfyPXg9ChbbRyFu5NKaHESx30l7tSP/asVxM/JfAbbbGB1/MLX+dqF7XWnlXCmx2w+fj/bTDV8CLCBKRotTQqpZJ8oCgixnieyKxH2tKSmiiFcBUxrgb7SN46+kh/zFWXBf88P4HiZJgzSksKjIs5sybhlhbYLGQ2VE6S/rGKFw7F6vyzdrTKLQMAHoal5oos48qoynTNVQLnry856BxXyoxQIQK9bvhmibn3wSNfS2tDHRzrJyVwjVvCOJv2Xu/SZZGQykeBLEnuwMykX7INYd+A24SeaWgAHvUFthk5Fg2SO+pugZCacqCfTIX1+34+i6wwyyBGpjSov0wfcYqyaolL//EFk=
+
 install:
-  - "pip install -r requirements.txt"
+  - pip install -r requirements.txt
 
 script:
-  - "nosetests -v"
+  - nosetests -v
 
 notifications:
-  slack: "${SLACK_KEY}"
+  slack: ${SLACK_KEY}
