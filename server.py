@@ -31,7 +31,7 @@ def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
     port = int(os.environ.get("PORT", 5000))
-    http_server.listen(options.port)
+    http_server.listen(port)
     tornado.ioloop.IOLoop.current().start()
 
 if __name__ == "__main__":
