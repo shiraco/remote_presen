@@ -8,15 +8,15 @@ import tornado.web
 from tornado.options import define, options
 
 
-class IndexHandler(tornado.web.RequestHandler):
+class SlideHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("index.html")
+        self.render("slide.html")
 
 
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r"/", IndexHandler),
+            (r"/", SlideHandler),
         ]
         settings = dict(
             cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",

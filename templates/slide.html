@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <link rel="stylesheet" href="{{ static_url('main.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ static_url('slide.css') }}" type="text/css"/>
     </style>
   </head>
   <body>
@@ -18,7 +18,8 @@
       var timestamp = Math.floor(Date.now() / 1000)
 
       var slideshow = remark.create({
-        sourceUrl: 'https://gist.githubusercontent.com/shiraco/fd363f27a5126a5e951e/raw/?timestamp=' + timestamp
+        sourceUrl: 'https://gist.githubusercontent.com/shiraco/fd363f27a5126a5e951e/raw/?timestamp=' + timestamp,
+        ratio: '16:9'
       });
     </script>
   </body>

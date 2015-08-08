@@ -21,7 +21,8 @@ class BaseTestCase(AsyncHTTPTestCase):
         decoded = response.body.decode(encode_type)
         return decoded
 
-class TestIndexHandler(BaseTestCase):
+
+class TestSlideHandler(BaseTestCase):
     def test_get(self):
         params = {}
         response = self.fetch("/?{}".format(urllib.parse.urlencode(params)),
