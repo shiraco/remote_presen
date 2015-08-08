@@ -11,4 +11,4 @@ script:
   - "nosetests -v"
 
 notifications:
-  slack: shiraco:c0bbZXum5ZgJWORGvxMXf9jD
+  slack: $SLACK_KEY
