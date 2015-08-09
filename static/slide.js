@@ -101,7 +101,7 @@ var updater = {
     start: function() {
 
         if (updater.socket == null) {
-            var url = "ws://" + location.host + "/ws";
+            var url = "wss://" + location.host + "/ws";
             updater.socket = new WebSocket(url);
 
             updater.socket.onopen = function() {
