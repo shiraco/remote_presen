@@ -9,7 +9,8 @@ var updater = {
     socket: null,
 
     start: function() {
-        var url = "wss://" + location.host + "/ws";
+        var protocol = ("https:" == location.protocol) ? "wss:" : "ws:"
+        var url = protocol + "//" + location.host + "/ws";
         updater.socket = new WebSocket(url);
 
         updater.socket.onmessage = function(event) {
