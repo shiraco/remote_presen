@@ -6,18 +6,77 @@ $(document).ready(function() {
     updater.start();
 });
 
-function rightButtonClicking() {
+function buttonClicking(keyCode) {
+
+  switch (keyCode){
+    case 37:
+      moveLeft();
+      break;
+
+    case 39:
+      moveRight();
+      break;
+  }
+
+}
+
+function nextPage(movePages) {
+    hash = location.hash;
+
+    if('#' == hash.charAt(0)){
+        currentPage = parseInt(hash.substring(1), 10);
+        pMode = false;
+
+        if('p' == hash.charAt(0)){
+            currentPage = parseInt(hash.substring(1), 10);
+            pMode = true;
+        }
+
+    } else {
+        return false;
+
+    };
+
+    next = currentPage + movePages;
+
+    return "#" + (pMode ? "p" : "") + next;
+
+}
+
+function moveRight() {
     var code = 39;  // Right
-    $('#reciever').trigger(
-      jQuery.Event( 'keydown', { keyCode: code, which: code } )
-    );
-    $('#reciever').trigger(
-      jQuery.Event( 'keypress', { keyCode: code, which: code } )
-    );
-    $('#reciever').trigger(
-      jQuery.Event( 'keyup', { keyCode: code, which: code } )
+
+    $("#body").trigger(
+        jQuery.Event( 'keydown', { keyCode: code, which: code } )
     );
     console.log("Right");
+
+    if (page = nextPage(+1)) {
+
+        console.log(page);
+        location.hash = page;
+
+    }
+
+    return false;
+}
+
+function moveLeft() {
+    var code = 37;  // Left
+
+    $("#body").trigger(
+        jQuery.Event( 'keydown', { keyCode: code, which: code } )
+    );
+    console.log("Left");
+
+    if (page = nextPage(-1)) {
+
+        console.log(page);
+        location.hash = page;
+
+    }
+
+    return false;
 }
 
 var callback = function(e){
@@ -50,6 +109,7 @@ var updater = {
 
                 // reset the tries back to 1 since we have a new connection opened.
                 updater.attempts = 1;
+
             };
 
             updater.socket.onmessage = function(event) {
@@ -58,8 +118,8 @@ var updater = {
                 var json = JSON.parse(event.data);
                 console.log(json);
 
-                // var iframe_src = "http://" + location.host + "/iframe";
-                // $("#iframe").attr("src", iframe_src);
+                buttonClicking(json["keyCode"]);
+
             };
 
             updater.socket.onclose = function(event){
@@ -88,9 +148,6 @@ var updater = {
     generateInterval: function(k){
         // generate the interval to a random number between 0 and the max
         return Math.min(30, (Math.pow(2, k) - 1)) * 1000 * Math.random();
-    },
-
-    ping: function(){
-        updater.socket.send("PING");
     }
+
 };
