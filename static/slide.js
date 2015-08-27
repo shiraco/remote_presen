@@ -8,26 +8,26 @@ $(document).ready(function() {
 
 function buttonClicking(keyCode) {
 
-  switch (keyCode){
-    case 37:
-      moveLeft();
-      break;
+    switch (keyCode) {
+        case 37:
+            moveLeft();
+            break;
 
-    case 39:
-      moveRight();
-      break;
-  }
+        case 39:
+            moveRight();
+            break;
+    }
 
 }
 
 function nextPage(movePages) {
     hash = location.hash;
 
-    if('#' == hash.charAt(0)){
+    if("#" == hash.charAt(0)) {
         currentPage = parseInt(hash.substring(1), 10);
         pMode = false;
 
-        if('p' == hash.charAt(0)){
+        if("p" == hash.charAt(0)) {
             currentPage = parseInt(hash.substring(1), 10);
             pMode = true;
         }
@@ -47,7 +47,7 @@ function moveRight() {
     var code = 39;  // Right
 
     $("#body").trigger(
-        jQuery.Event( 'keydown', { keyCode: code, which: code } )
+        jQuery.Event("keydown", {keyCode: code, which: code})
     );
     console.log("Right");
 
@@ -65,7 +65,7 @@ function moveLeft() {
     var code = 37;  // Left
 
     $("#body").trigger(
-        jQuery.Event( 'keydown', { keyCode: code, which: code } )
+        jQuery.Event("keydown", {keyCode: code, which: code})
     );
     console.log("Left");
 
@@ -79,15 +79,15 @@ function moveLeft() {
     return false;
 }
 
-var callback = function(e){
+var callback = function(e) {
     console.log(e.type, e);
     var text = e.type;
     var code = e.which ? e.which : e.keyCode;
-    if(13 === code){
-        text += ': ENTER';
+    if (13 === code) {
+        text += ": ENTER";
         rightButtonClicking(); // debug
     } else {
-        text += ': keycode '+ code;
+        text += ": keycode "+ code;
     }
     console.log(text);
 };
@@ -123,12 +123,12 @@ var updater = {
 
             };
 
-            updater.socket.onclose = function(event){
+            updater.socket.onclose = function(event) {
                 console.log("onclose. reason: %s", event.reason);
 
                 var time = updater.generateInterval(updater.attempts);
 
-                setTimeout(function(){
+                setTimeout(function() {
                     // We"ve tried to reconnect so increment the attempts by 1
                     updater.attempts++;
                     console.log("attempts: ", updater.attempts);
@@ -140,13 +140,13 @@ var updater = {
                 }, time);
             };
 
-            updater.socket.onerror = function(event){
+            updater.socket.onerror = function(event) {
                 console.log("onerror");
             }
         }
     },
 
-    generateInterval: function(k){
+    generateInterval: function(k) {
         // generate the interval to a random number between 0 and the max
         return Math.min(30, (Math.pow(2, k) - 1)) * 1000 * Math.random();
     }

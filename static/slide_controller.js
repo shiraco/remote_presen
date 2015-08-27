@@ -5,6 +5,7 @@ $(document).ready(function() {
     updater.start();
 });
 
+// show command
 var updater = {
     socket: null,
 
@@ -28,38 +29,43 @@ var updater = {
     }
 };
 
+// command
 function newCommand(keyCode) {
-    var message = { keyCode: keyCode };
+    var message = {keyCode: keyCode};
     updater.socket.send(JSON.stringify(message));
 }
 
+// move to left
 function leftButtonClicked() {
     var code = 37;  // Left
-    $('#sender').trigger(
-        jQuery.Event( 'keyup', { keyCode: code, which: code } )
+    $("#sender").trigger(
+        jQuery.Event("keyup", {keyCode: code, which: code})
     );
     newCommand(code);
     return false;
 }
+
+// move to right
 function rightButtonClicked() {
     var code = 39;  // Right
-    $('#sender').trigger(
-        jQuery.Event( 'keyup', { keyCode: code, which: code } )
-      );
-      newCommand(code);
-      return false;
+    $("#sender").trigger(
+        jQuery.Event("keyup", {keyCode: code, which: code})
+    );
+    newCommand(code);
+    return false;
 }
 
-var callback = function(e){
+var callback = function(e) {
     console.log(e.type, e);
     var text = e.type;
     var code = e.which ? e.which : e.keyCode;
-    if(13 === code){
-        text += ': ENTER';
+    if (13 === code) {
+        text += ": ENTER";
+
     } else {
-        text += ': keycode '+code;
+        text += ": keycode " + code;
     }
     console.log(text);
 };
 
-$('#sender').keyup(callback);
+$("#sender").keyup(callback);
