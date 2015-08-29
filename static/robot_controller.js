@@ -1,9 +1,16 @@
+$(document).ready(function() {
+    if (!window.console) window.console = {};
+    if (!window.console.log) window.console.log = function() {};
+
+    robotDeactivate();
+});
+
 var self = this;
 
 // connect
 function connect() {
-    console.log("connecting");
     var robotIp = $("#ip1").val() + "." + $("#ip2").val() + "." + $("#ip3").val() + "." + $("#ip4").val();
+    console.log("connecting... " + robotIp);
 
     var setupIns_ = function() {
         self.qims.service("ALTextToSpeech").done(function(ins) {
@@ -16,6 +23,9 @@ function connect() {
 
         self.qims.service("ALMotion").done(function(ins) {
             self.alMotion = ins;
+            self.alMotion.robotIsWakeUp().done(function(val) {
+                self.showRobotIsWakeUp(val);
+            });
         });
 
         self.qims.service("ALBehaviorManager").done(function(ins) {
@@ -24,6 +34,9 @@ function connect() {
 
         self.qims.service("ALAutonomousLife").done(function(ins) {
             self.alAutonomousLife = ins;
+            self.alAutonomousLife.getState().done(function(val) {
+                self.showAutonomousStatus(val);
+            });
         });
 
         self.qims.service("ALAudioDevice").done(function(ins) {
@@ -49,6 +62,7 @@ function connect() {
                 tts.say("接続");
             });
             setupIns_();
+            robotActivate()
 
         })
         .on("disconnect", function() {
@@ -58,62 +72,70 @@ function connect() {
 
 // show volume
 function showAudioVolume(val) {
-    console.log(val);
-    // あとからページに表示させる
-    $("#pepperVolume").val(val);
+    console.log("volume: " + val);
+    $("#volume").val(val);
 }
 
 // change volume
-function changeAudioVolume() {
-    var volume = $("#pepperVolume").val();
-    volume = Number(volume);
-    console.log(volume);
-    self.alAudioDevice.setOutputVolume(volume);
-    self.hello()
+function changeAudioVolume(volume) {
+    console.log("change volume: " + volume);
+    if (self.alAudioDevice) {
+        self.alAudioDevice.setOutputVolume(volume);
+        self.alAudioDevice.getOutputVolume().done(function(val) {
+            self.showAudioVolume(val);
+        });
+        self.hello()
+    }
 }
 
 // hello
 function hello() {
-    console.log("hello");
-    this.alAnimatedSpeech.say("はろー");
+    self.animatedSay("うん");
 }
 
 // say
-function say() {
-    console.log("say");
-    var value = $("#sayText").val();
-    this.alTextToSpeech.say(value);
+function say(value) {
+    console.log("say: " + value);
+    if (self.alTextToSpeech) {
+        self.alTextToSpeech.say(value);
+    }
 }
 
 // animated say
-function animatedSay() {
-    console.log("animated say");
-    var value = $("#animatedSayText").val();
-    this.alAnimatedSpeech.say(value);
+function animatedSay(value) {
+    console.log("animated say: " + value);
+    if (self.alAnimatedSpeech) {
+        self.alAnimatedSpeech.say(value);
+    }
 }
 
 // move
 function move(to) {
+    console.log("moving to:" + to);
     if (self.alMotion) {
-        console.log("move to");
         switch (to) {
-            case 0:
+            case 0: // turn left
+                console.log("moved to left");
                 self.alMotion.moveTo(0, 0, 0.5).fail(function(err){console.log(err);});
                 break;
 
-            case 1:
+            case 1: // turn right
+                console.log("moved to right");
                 self.alMotion.moveTo(0, 0, -0.5).fail(function(err){console.log(err);});
                 break;
 
-            case 2:
+            case 2: // go straight
+                console.log("moved to straight");
                 self.alMotion.moveTo(0.3, 0, 0).fail(function(err){console.log(err);});
                 break;
 
-            case 3:
+            case 3: // go back
+                console.log("moved to back");
                 self.alMotion.moveTo(-0.3, 0, 0).fail(function(err){console.log(err);});
                 break;
 
-            case 4:
+            case 4: // no move
+                console.log("no moved");
                 self.alMotion.moveTo(0, 0, 0).fail(function(err){console.log(err);});
                 break;
 
@@ -122,72 +144,128 @@ function move(to) {
 }
 
 // run behavior
-function action(num) {
-    switch (num) {
-        case 0:
-            self.alBehavior.stopAllBehaviors();
-            break;
+function runBehavior(num) {
+    console.log("running behavior: " + val);
+    if (self.alBehavior) {
+        switch (num) {
+            case 0:
+                console.log("ran behavior: " + val);
+                self.alBehavior.stopAllBehaviors();
+                break;
 
-        case 1:
-            self.alBehavior.runBehavior("animation-5ffd19/HighTouch");
-            break;
+            case 1:
+                console.log("ran behavior: " + val);
+                self.alBehavior.runBehavior("animation-5ffd19/HighTouch");
+                break;
 
-        case 2:
-            self.alBehavior.runBehavior("pepper_self_introduction_waist_sample/.");
-            break;
+            case 2:
+                console.log("ran behavior: " + val);
+                self.alBehavior.runBehavior("pepper_self_introduction_waist_sample/.");
+                break;
 
+        }
     }
+}
+
+// show autonomous
+function showAutonomousStatus(val) {
+    console.log("autonomous: " + val);
+    checked = (val != "disabled")
+    $("#autonomousSwitch").prop('checked', checked);
+
 }
 
 // autonomous
 function autonomousSwitch(bl) {
-    var status;
-    if (bl)  {
-        console.log("ON");
-        self.alAutonomousLife.getState().done(function(val) {
-            console.log(val)
-        });
-        self.alAutonomousLife.setState("solitary");
+    console.log("autonomous chenging to: " + bl);
 
-    } else {
-        console.log("OFF");
+    if (self.alAutonomousLife) {
+        if (bl)  {
+            console.log("autonomous: ON");
+            self.alAutonomousLife.setState("solitary");
+
+        } else {
+            console.log("autonomous: OFF");
+            self.alAutonomousLife.setState("disabled");
+        }
+
         self.alAutonomousLife.getState().done(function(val) {
-            console.log(val)
+            self.showAutonomousStatus(val);
         });
-        self.alAutonomousLife.setState("disabled");
+
+        self.alMotion.robotIsWakeUp().done(function(val) {
+            self.showRobotIsWakeUp(val);
+        });
     }
+
+}
+
+// showRobotIsWakeUpp
+function showRobotIsWakeUp(val) {
+    console.log("robot is wakeup: " + val);
+    $("#sleepSwitch").prop('checked', val);
+
 }
 
 // sleep
 function sleepSwitch(bl) {
-    var status;
-    if (bl) {
-        console.log("ON");
-        self.alMotion.wakeUp();
+    console.log("wakeup/sleep: " + bl);
+    if (self.alMotion) {
+        if (bl) {
+            console.log("wakeup/sleep: wakeup");
+            self.alMotion.wakeUp();
 
-     } else {
-        console.log("OFF");
-        self.alMotion.rest();
+         } else {
+            console.log("wakeup/sleep: sleep");
+            self.alMotion.rest();
 
+        }
+
+        self.alMotion.robotIsWakeUp().done(function(val) {
+            self.showRobotIsWakeUp(val);
+        });
+
+        self.alAutonomousLife.getState().done(function(val) {
+            self.showAutonomousStatus(val);
+        });
     }
+
 }
 
 // raise event
 function qimessagingMemoryEvent() {
-    console.log("push!");
-    self.alMemory.raiseEvent("PepperQiMessaging/Hey", "1");
+    console.log("raise event: Hey");
+    if (self.alMemory) {
+        self.alMemory.raiseEvent("PepperQiMessaging/Hey", "1");
+    }
 }
 
 // subscribe event
-function qimessagingMemorySubscribe(){
+function qimessagingMemorySubscribe() {
     console.log("subscriber!");
-    self.alMemory.subscriber("PepperQiMessaging/Reco").done(function(subscriber) {
-        subscriber.signal.connect(toTabletHandler);
-    });
+    if (self.alMemory) {
+        self.alMemory.subscriber("PepperQiMessaging/Reco").done(function(subscriber) {
+            subscriber.signal.connect(toTabletHandler);
+        });
+    }
 }
 
-// ?
+// tablet
 function toTabletHandler(value) {
     console.log("PepperQiMessaging/Recoイベント発生: " + value);
     $(".memory").text(value);
+}
+
+// enabled
+function robotActivate() {
+    console.log("Robot activate");
+    disabled = false;
+    $(".robot-input").prop("disabled", disabled);
+}
+
+// enabled
+function robotDeactivate() {
+    console.log("Robot deactivate");
+    disabled = true;
+    $(".robot-input").prop("disabled", disabled);
 }

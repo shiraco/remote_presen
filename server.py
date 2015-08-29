@@ -20,9 +20,9 @@ class SlideHandler(tornado.web.RequestHandler):
         self.render("slide.html")
 
 
-class RemoteHandler(tornado.web.RequestHandler):
+class ControllerHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("remote.html", messages=SlideSocketHandler.command_cache)
+        self.render("controller.html", messages=SlideSocketHandler.command_cache)
 
 
 class SlideSocketHandler(tornado.websocket.WebSocketHandler):
@@ -76,7 +76,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", SlideHandler),
-            (r"/remote", RemoteHandler),
+            (r"/controller", ControllerHandler),
             (r"/ws", SlideSocketHandler),
         ]
         settings = dict(

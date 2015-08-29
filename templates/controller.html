@@ -4,12 +4,15 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ static_url('controller.css') }}" type="text/css"/>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
   <body>
+
+    <!-- nav bar -->
     <div class="navbar-fixed">
       <nav>
         <div class="nav-wrapper grey darken-4">
@@ -25,197 +28,203 @@
           </ul>
         </div>
       </nav>
-
     </div>
 
+    <!-- tab menu -->
     <div class="row">
       <div class="col s12">
         <ul class="tabs">
-          <li class="tab col s4"><a class="active" href="#test1">Slide</a></li>
-          <li class="tab col s4"><a href="#test2">Robot</a></li>
-          <li class="tab col s4"><a href="#test3">Settings</a></li>
+          <li class="tab col s4"><a class="active" href="#tab1">Slide</a></li>
+          <li class="tab col s4"><a href="#tab2">Robot</a></li>
+          <li class="tab col s4"><a href="#tab3">Settings</a></li>
         </ul>
       </div>
     </div>
 
-    <div class="section">
-      <div class="row">
-        <h5>Message</h5>
-        <div class="col s12">
-          <span id="sender"></span>
-          <span id="message"></span>
+    <div class="container">
+
+      <!-- common menu -->
+      <div id="tab0">
+        <div class="row">
+          <div class="section col s12">
+            <h5 class="col s12">Message</h5>
+            <span id="sender"></span>
+            <span id="message"></span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="divider"></div>
+      <div class="divider"></div>
 
-    <div id="test1" class="col s12">
+      <!-- tab1 menu -->
+      <div id="tab1">
 
-      <div class="section">
-        <div class="row">
+        <div class="section">
           <h5>Slide Controller</h5>
-
-          <div class=""><h6>#1 Introduction</h6></div>
-
-          <div class="col s6 m3 l2 waves-effect waves-light">
-            <div class="card light-blue darken-1 center-align">
-              <div class="card-action">
-                <a class="center-align keyup white-text" onclick="leftButtonClicked();"><i class="large material-icons">skip_previous</i></a>
-              </div>
+          <div class="row">
+            <div class="col s12"><h6>#1 Introduction</h6></div>
+            <div class="col s6 m3 l2 center-align">
+              <button class="center-align keyup white-text btn-large light-blue darken-1 slide-input" onclick="leftButtonClicked();"><i class="large material-icons">skip_previous</i></button>
             </div>
-          </div>
-          <div class="col s6 m3 l2 waves-effect waves-light">
-            <div class="card light-blue darken-1 center-align">
-              <div class="card-action">
-                <a class="center-align keyup white-text" onclick="rightButtonClicked();"><i class="large material-icons">skip_next</i></a>
-              </div>
+            <div class="col s6 m3 l2 center-align">
+              <button class="center-align keyup white-text btn-large light-blue darken-1 slide-input" onclick="rightButtonClicked();"><i class="large material-icons">skip_next</i></buttton>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="divider"></div>
+        <div class="divider"></div>
 
-      <div class="section">
-        <div class="row">
+        <div class="section">
           <h5>Robot Say</h5>
-          <div class="col s12">
-            <ul class="collection">
-              <li class="collection-item"><div class="truncate">わたしは◯△です<a href="#!" class="secondary-content btn">Say</a></div></li>
-              <li class="collection-item"><div class="truncate">今日は◯△をはなします<a href="#!" class="secondary-content btn">Say</a></div></li>
-              <li class="collection-item"><div class="truncate">よろしくおねがいします<a href="#!" class="secondary-content btn">Say</a></div></li>
-              <li class="collection-item"><div class="truncate">ちゃんと聞いて<a href="#!" class="secondary-content btn">Say</a></div></li>
+          <div class="row">
+            <ul class="collection col s12">
+              <li class="collection-item dismissable">
+                <span id="saySlideText1">わたしはPepperです</span>
+                <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSay($('#saySlideText1').text());">Say</button>
+              </li>
+              <li class="collection-item dismissable">
+                <span id="saySlideText2">今日は天気のことをはなします</span>
+                <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSay($('#saySlideText2').text());">Say</button>
+              </li>
+              <li class="collection-item dismissable">
+                <span id="saySlideText3">私は人工知能でお話します</span>
+                <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSay($('#saySlideText3').text());">Say</button>
+              </li>
+              <li class="collection-item dismissable">
+                <span id="saySlideText4">こんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわ</span>
+                <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSay($('#saySlideText4').text());">Say</button>
+              </li>
             </ul>
-
           </div>
         </div>
+
       </div>
 
-      <div class="divider"></div>
-    </div>
+      <!-- tab2 menu -->
+      <div id="tab2">
 
-    <div id="test2" class="col s12">
-
-      <div class="section">
-        <div class="row">
+        <div class="section">
           <h5>Robot Motion</h5>
-          <div class="col s4 m2 l1 waves-effect waves-light">
-            <div class="card red darken-3 center-align">
-              <div class="card-action">
-                <a class="center-align keyup white-text" onclick="">◀</a>
+          <div class="row">
+            <div class="col s12 center-align">
+              <div class="col s4 m3 l2 center-align">
+                <button class="center-align keyup white-text btn-large red darken-3 waves-effect waves-light robot-input" onclick="move(0);">◀</button>
               </div>
-            </div>
-          </div>
-          <div class="col s4 m2 l1 waves-effect waves-light">
-            <div class="card red darken-3 center-align">
-              <div class="card-action">
-                <a class="center-align keyup white-text" onclick="">▲</a>
+              <div class="col s4 m3 l2 center-align">
+                <div class="center-align">
+                  <button class="center-align keyup white-text btn red darken-3 waves-effect waves-light robot-input" onclick="move(2);">▲</button>
+                </div>
+                <div class="center-align">
+                  <button class="center-align keyup white-text btn-flat white robot-input" onclick="move(4);"></button>
+                </div>
+                <div class="center-align">
+                  <button class="center-align keyup white-text btn red darken-3 waves-effect waves-light robot-input" onclick="move(3);">▼</button>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="col s4 m2 l1 waves-effect waves-light">
-            <div class="card red darken-3 center-align">
-              <div class="card-action">
-                <a class="center-align keyup white-text" onclick="">▶</a>
+              <div class="col s4 m3 l2 center-align">
+                <button class="center-align keyup white-text btn-large red darken-3 waves-effect waves-light robot-input" onclick="move(1);">▶</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="divider"></div>
+        <div class="divider"></div>
 
-      <div class="row">
+        <div class="section">
+          <h5>ALMemory Event</h5>
+          <div class="row">
+            <div class="col s12">
+      		    <button onclick="qimessagingMemoryEvent()" class="btn btn-info robot-input">PepperQiMessaging/Hey</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
           <h5>Robot Say</h5>
-          <ul class="collection">
-          <li class="collection-item">
-            <span class="col s11 m11 l11">
-              <span class="input-field">
-                <input value="" id="sayText" type="text" class="validate">
-                <label for="say">Message</label>
-              </span>
-            </span>
-            <a href="#!" class="secondary-content btn" onclick="say()">Say</a>
-            <a href="#!" class="secondary-content btn" onclick="animatedSay()">Animated Say</a>
-          </li>
-        </ul>
-      </div>
-      <div class="divider"></div>
-
-      <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-        <a class="btn-floating btn-large red">
-          <i class="large material-icons">mode_edit</i>
-        </a>
-        <ul>
-          <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></i></a></li>
-          <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-          <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-          <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div id="test3" class="col s12">
-      <div class="section">
-        <div class="row">
-            <h5>Robot IP Address</h5>
-            <form class="col s12">
-            <div class="row">
-              <div class="input-field col s1">
-              </div>
-              <div class="input-field col s2">
-                <input id="ip1" type="text" pattern="\d{1,3}\" class="validate" value="192">
-              </div>
-              <div class="input-field col s2">
-                <input id="ip2" type="text" pattern="\d{1,3}\" class="validate" value="168">
-              </div>
-              <div class="input-field col s2">
-                <input id="ip3" type="text" pattern="\d{1,3}\" class="validate" value="0">
-              </div>
-              <div class="input-field col s2">
-                <input id="ip4" type="text" pattern="\d{1,3}\" class="validate" value="2">
-              </div>
-              <div class="input-field col s2">
-                <a class="center-align keyup white-text btn" onclick="connect();"><i class="large material-icons">power_settings_new</i></a>
-              </div>
-              <div class="input-field col s1">
-              </div>
-
-            </div>
-          </form>
+          <div class="row">
+            <ul class="collection col s12">
+              <li class="collection-item">
+                <div class="input-field col s10 m11 l11">
+                  <textarea id="sayText" class="materialize-textarea validate robot-input" value="こんにちは"></textarea>
+                  <label for="sayText">say text</label>
+                </div>
+                <div class="col s2 m1 l1">
+                  <button class="secondary-content btn-floating teal robot-input" onclick="animatedSay($('#sayText').val())">Say</button>
+                  <button class="secondary-content btn-floating teal lighten-5 blue-text robot-input" onclick="say($('#sayText').val())">Say</button>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+
       </div>
 
-      <div class="divider"></div>
+      <!-- tab3 menu -->
+      <div id="tab3">
 
-      <div class="section">
-        <div class="row">
-          <h5>Voice Volume</h5>
-          <div class="col s1 m1 l1">
-            <a href="!#" class="teal-text"><i class="material-icons">volume_mute</i></a>
-          </div>
-
-          <div class="col s1 m1 l1">
-            <a href="!#" class="teal-text"><i class="material-icons">volume_down</i></a>
-          </div>
-
-          <div class="col s9 m5 l3">
-            <form action="#">
-              <p class="range-field">
-                <input type="range" id="volume" min="0" max="100" />
-              </p>
+        <div class="section">
+          <h5>Robot IP Address</h5>
+          <div class="row">
+            <form class="col s12 m12 l6">
+              <div class="input-field col s1"></div>
+              <div class="input-field col s2"><input id="ip1" type="text" pattern="\d{1,3}\" class="validate" value="192"></div>
+              <div class="input-field col s2"><input id="ip2" type="text" pattern="\d{1,3}\" class="validate" value="168"></div>
+              <div class="input-field col s2"><input id="ip3" type="text" pattern="\d{1,3}\" class="validate" value="0"></div>
+              <div class="input-field col s2"><input id="ip4" type="text" pattern="\d{1,3}\" class="validate" value="3"></div>
+              <div class="input-field col s2"><a class="center-align keyup white-text btn" onclick="connect();"><i class="large material-icons">power_settings_new</i></a></div>
+              <div class="input-field col s1"></div>
             </form>
           </div>
+        </div>
 
-          <div class="col s1 m1 l1">
-            <a href="!#" class="teal-text"><i class="material-icons">volume_up</i></a>
+        <div class="divider"></div>
+
+        <div class="section">
+          <h5 class="col">Voice Volume</h5>
+          <div class="row">
+            <div class="col s1 m1 l1"><button class="white robot-input btn-flat z-depth-0" onclick="changeAudioVolume(0)"><i class="material-icons teal-text">volume_mute</i></button></div>
+            <div class="col s1 m1 l1"><button class="white robot-input btn-flat z-depth-0" onclick="changeAudioVolume(Number($('#volume').val()) - 5)"><i class="material-icons teal-text">volume_down</i></button></div>
+            <div class="col s9 m5 l3"><form action="#"><input type="range" id="volume" class="range-field robot-input" min="0" max="100" value="1" onchange="changeAudioVolume(Number($('#volume').val()))" /></form></div>
+            <div class="col s1 m1 l1"><button class="white robot-input btn-flat z-depth-0" onclick="changeAudioVolume(Number($('#volume').val()) + 5)"><i class="material-icons teal-text">volume_up</i></button></div>
           </div>
         </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+          <h5>Autonomous</h5>
+          <div class="row">
+            <div class="switch">
+              <label>
+                Off
+                <input id="autonomousSwitch" class="robot-input" type="checkbox" onchange="autonomousSwitch($('#autonomousSwitch').is(':checked'))">
+                <span class="lever"></span>
+                On
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+          <h5 class="col s12">Wake up / Sleep</h5>
+          <div class="row">
+            <div class="switch">
+              <label>
+                Off
+                <input checked id="sleepSwitch" class="robot-input" type="checkbox" onchange="sleepSwitch($('#sleepSwitch').is(':checked'))">
+                <span class="lever"></span>
+                On
+              </label>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="divider"></div>
     </div>
 
     <!--Import jQuery before materialize.js-->
@@ -225,6 +234,9 @@
     <!-- Compiled and minified JavaScript -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    <script type="text/javascript">
+    $(".button-collapse").sideNav();
+    </script>
 
     <!--Import qimessaging-->
     <script type="text/javascript" src="{{ static_url('libs/qimessaging/1.0/jquery.min.js') }}"></script>
