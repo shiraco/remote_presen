@@ -75,7 +75,7 @@ class SlideSocketHandler(tornado.websocket.WebSocketHandler):
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r"/", SlideHandler),
+            (r"/slide", SlideHandler),
             (r"/controller", ControllerHandler),
             (r"/ws", SlideSocketHandler),
         ]
