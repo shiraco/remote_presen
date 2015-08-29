@@ -25,7 +25,7 @@ class BaseTestCase(AsyncHTTPTestCase):
 class TestSlideHandler(BaseTestCase):
     def test_get(self):
         params = {}
-        response = self.fetch("/?{}".format(urllib.parse.urlencode(params)),
+        response = self.fetch("/slide?{}".format(urllib.parse.urlencode(params)),
                               method="GET")
         self.assertEqual(response.code, 200)
 
@@ -33,6 +33,6 @@ class TestSlideHandler(BaseTestCase):
 class TestRemoteHandler(BaseTestCase):
     def test_get(self):
         params = {}
-        response = self.fetch("/remote?{}".format(urllib.parse.urlencode(params)),
+        response = self.fetch("/controller?{}".format(urllib.parse.urlencode(params)),
                               method="GET")
         self.assertEqual(response.code, 200)
