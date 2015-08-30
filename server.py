@@ -7,12 +7,18 @@ import tornado.options
 import tornado.web
 import tornado.websocket
 import tornado.escape
+import tornado.autoreload
 from tornado.options import define, options
 import logging
 
 
 # slide を表示しているクライアントを格納
 slide_waiters = set()
+
+
+class IndexHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.redirect("/slide")
 
 
 class SlideHandler(tornado.web.RequestHandler):
@@ -76,11 +82,13 @@ class SlideSocketHandler(tornado.websocket.WebSocketHandler):
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
+            (r"/", IndexHandler),
             (r"/slide", SlideHandler),
             (r"/controller", ControllerHandler),
             (r"/ws", SlideSocketHandler),
         ]
         settings = dict(
+            debug=True,
             cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
