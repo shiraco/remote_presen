@@ -46,7 +46,8 @@ class SlideSocketHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         logging.info("got message %r", message)
         parsed = tornado.escape.json_decode(message)
-        command = {"keyCode": parsed["keyCode"]}
+        command = {"keyCode": parsed["keyCode"],
+                   "slidePage": parsed["slidePage"]}
 
         SlideSocketHandler.update_cache(command)
         SlideSocketHandler.send_updates(command)

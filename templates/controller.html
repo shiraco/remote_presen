@@ -62,7 +62,7 @@
         <div class="section">
           <h5>Slide Controller</h5>
           <div class="row">
-            <div class="col s12"><h6>#1 Introduction</h6></div>
+            <div class="col s12"><span id="slide-nav"></span></div>
             <div class="col s6 m3 l2 center-align">
               <button class="center-align keyup white-text btn-large light-blue darken-1 slide-input" onclick="leftButtonClicked();"><i class="large material-icons">skip_previous</i></button>
             </div>
@@ -77,7 +77,7 @@
         <div class="section">
           <h5>Robot Say</h5>
           <div class="row">
-            <ul class="collection col s12">
+            <ul id="robot-say-collection" class="collection col s12">
               <li class="collection-item dismissable">
                 <span id="saySlideText1">わたしはPepperです</span>
                 <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSay($('#saySlideText1').text());">Say</button>
@@ -242,6 +242,9 @@
     <script type="text/javascript" src="{{ static_url('libs/qimessaging/1.0/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ static_url('libs/qimessaging/1.0/qimessaging.js') }}"></script>
     <script type="text/javascript" src="{{ static_url('robot_controller.js') }}"></script>
+
+    <!-- marked -->
+    <script type="text/javascript" src="{{ static_url('bower_components/marked/lib/marked.js') }}"></script>
 
   </body>
 </html>

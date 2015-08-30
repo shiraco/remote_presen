@@ -1,3 +1,4 @@
+// # document ready
 $(document).ready(function() {
     if (!window.console) window.console = {};
     if (!window.console.log) window.console.log = function() {};
@@ -7,11 +8,12 @@ $(document).ready(function() {
 
 var self = this;
 
-// connect
+// # connect
 function connect() {
     var robotIp = $("#ip1").val() + "." + $("#ip2").val() + "." + $("#ip3").val() + "." + $("#ip4").val();
     console.log("connecting... " + robotIp);
 
+    // * setup
     var setupIns_ = function() {
         self.qims.service("ALTextToSpeech").done(function(ins) {
             self.alTextToSpeech = ins;
@@ -54,10 +56,14 @@ function connect() {
         });
     }
 
+    // * robot session connect
     self.qims = new QiSession(robotIp);
     self.qims.socket()
         .on("connect", function() {
             console.log("connected");
+            updater.action = "Robot connected";
+            updater.showMessage(updater.action);
+
             self.qims.service("ALTextToSpeech").done(function(tts) {
                 tts.say("接続");
             });
@@ -67,18 +73,24 @@ function connect() {
         })
         .on("disconnect", function() {
             console.log("disconnected");
+            updater.action = "Robot disconnected";
+            updater.showMessage(updater.action);
         });
 }
 
-// show volume
+// # robot command
+// * show volume
 function showAudioVolume(val) {
     console.log("volume: " + val);
     $("#volume").val(val);
 }
 
-// change volume
+// * change volume
 function changeAudioVolume(volume) {
     console.log("change volume: " + volume);
+    updater.action = "Robot change volume: " + volume;
+    updater.showMessage(updater.action);
+
     if (self.alAudioDevice) {
         self.alAudioDevice.setOutputVolume(volume);
         self.alAudioDevice.getOutputVolume().done(function(val) {
@@ -88,30 +100,39 @@ function changeAudioVolume(volume) {
     }
 }
 
-// hello
+// * hello
 function hello() {
     self.animatedSay("うん");
 }
 
-// say
+// * say
 function say(value) {
     console.log("say: " + value);
+    updater.action = "Robot say: " + value;
+    updater.showMessage(updater.action);
+
     if (self.alTextToSpeech) {
         self.alTextToSpeech.say(value);
     }
 }
 
-// animated say
+// * animated say
 function animatedSay(value) {
     console.log("animated say: " + value);
+    updater.action = "Robot animated say: " + value;
+    updater.showMessage(updater.action);
+
     if (self.alAnimatedSpeech) {
         self.alAnimatedSpeech.say(value);
     }
 }
 
-// move
+// * move
 function move(to) {
     console.log("moving to:" + to);
+    updater.action = "Robot move to: " + to;
+    updater.showMessage(updater.action);
+
     if (self.alMotion) {
         switch (to) {
             case 0: // turn left
@@ -143,9 +164,12 @@ function move(to) {
     }
 }
 
-// run behavior
+// * run behavior
 function runBehavior(num) {
-    console.log("running behavior: " + val);
+    console.log("running behavior: " + num);
+    updater.action = "Robot run behavior: " + num;
+    updater.showMessage(updater.action);
+
     if (self.alBehavior) {
         switch (num) {
             case 0:
@@ -167,17 +191,20 @@ function runBehavior(num) {
     }
 }
 
-// show autonomous
+// * show autonomous
 function showAutonomousStatus(val) {
     console.log("autonomous: " + val);
+
     checked = (val != "disabled")
     $("#autonomousSwitch").prop('checked', checked);
 
 }
 
-// autonomous
+// * autonomous switch
 function autonomousSwitch(bl) {
     console.log("autonomous chenging to: " + bl);
+    updater.action = "Robot autonomous: " + bl;
+    updater.showMessage(updater.action);
 
     if (self.alAutonomousLife) {
         if (bl)  {
@@ -200,16 +227,19 @@ function autonomousSwitch(bl) {
 
 }
 
-// showRobotIsWakeUpp
+// * showRobotIsWakeUpp
 function showRobotIsWakeUp(val) {
     console.log("robot is wakeup: " + val);
     $("#sleepSwitch").prop('checked', val);
 
 }
 
-// sleep
+// * sleep switch
 function sleepSwitch(bl) {
     console.log("wakeup/sleep: " + bl);
+    updater.action = "Robot wakeup/sleep: " + bl;
+    updater.showMessage(updater.action);
+
     if (self.alMotion) {
         if (bl) {
             console.log("wakeup/sleep: wakeup");
@@ -232,15 +262,18 @@ function sleepSwitch(bl) {
 
 }
 
-// raise event
+// * raise event
 function qimessagingMemoryEvent() {
     console.log("raise event: Hey");
+    updater.action = "Robot raise event: " + "Hey";
+    updater.showMessage(updater.action);
+
     if (self.alMemory) {
         self.alMemory.raiseEvent("PepperQiMessaging/Hey", "1");
     }
 }
 
-// subscribe event
+// * subscribe event
 function qimessagingMemorySubscribe() {
     console.log("subscriber!");
     if (self.alMemory) {
@@ -250,20 +283,21 @@ function qimessagingMemorySubscribe() {
     }
 }
 
-// tablet
+// * tablet
 function toTabletHandler(value) {
     console.log("PepperQiMessaging/Recoイベント発生: " + value);
     $(".memory").text(value);
 }
 
-// enabled
+// # button activate & deactivate
+// * activate
 function robotActivate() {
     console.log("Robot activate");
     disabled = false;
     $(".robot-input").prop("disabled", disabled);
 }
 
-// enabled
+// * deactivate
 function robotDeactivate() {
     console.log("Robot deactivate");
     disabled = true;

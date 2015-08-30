@@ -17,7 +17,7 @@
       if (!Date.now) {
         Date.now = function() {return new Date().getTime();}
       }
-      var timestamp = Math.floor(Date.now() / 1000)
+      var timestamp = Math.floor(Date.now() / 1000);
 
       var slideshow = remark.create({
         sourceUrl: "https://gist.githubusercontent.com/shiraco/fd363f27a5126a5e951e/raw/" + "?timestamp=" + timestamp,
