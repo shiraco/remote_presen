@@ -106,7 +106,7 @@ var updater = {
             console.log(index + ":" + element + ", disabled:" + disabled);
             node.append("<li class='collection-item dismissable'>" +
                         "  <span id='saySlideText" + index + "'>" + element + "</span>" +
-                        "  <button id='saySlideText" + index + "-btn' class='secondary-content btn-floating center-align keyup white-text waves-effect waves-light robot-input' onclick='animatedSay($(\"#saySlideText" + index + "\").text());'>Say</button>" +
+                        "  <button id='saySlideText" + index + "-btn' class='secondary-content btn-floating center-align keyup white-text waves-effect waves-light robot-input' onclick='animatedSayClicked(\"#saySlideText" + index + "\");'>Say</button>" +
                         "</li>");
             $("#saySlideText" + index + "-btn").prop("disabled", disabled);
 
@@ -181,4 +181,11 @@ function newCommand(keyCode, slidePage) {
 
     // send command
     updater.socket.send(JSON.stringify(message));
+}
+
+// * animated say clicked
+function animatedSayClicked(value) {
+    var node = $(value);
+    animatedSay(value);
+    node.parent().remove();
 }
