@@ -1,0 +1,19 @@
+{
+  "name": "remote_presen",
+  "version": "0.0.0",
+  "homepage": "https://github.com/shiraco/remote_presen",
+  "authors": [
+    "Koji Shiraishi <shiraco@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "marked": "~0.3.5"
+  }
+}

@@ -60,3 +60,5 @@ docs/_build/
 target/
 
 venv/
+
+bower_components/
