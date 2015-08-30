@@ -106,7 +106,7 @@ var updater = {
             console.log(index + ":" + element + ", disabled:" + disabled);
             node.append("<li class='collection-item dismissable'>" +
                         "  <span id='saySlideText" + index + "'>" + element + "</span>" +
-                        "  <button id='saySlideText" + index + "-btn' class='secondary-content btn-floating center-align keyup white-text robot-input' onclick='animatedSay($(\"#saySlideText" + index + "\").text());'>Say</button>" +
+                        "  <button id='saySlideText" + index + "-btn' class='secondary-content btn-floating center-align keyup white-text waves-effect waves-light robot-input' onclick='animatedSay($(\"#saySlideText" + index + "\").text());'>Say</button>" +
                         "</li>");
             $("#saySlideText" + index + "-btn").prop("disabled", disabled);
 
