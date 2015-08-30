@@ -8,6 +8,11 @@ $(document).ready(function() {
 
 var self = this;
 
+// # robot
+var robot = {
+    enable: null
+}
+
 // # connect
 function connect() {
     var robotIp = $("#ip1").val() + "." + $("#ip2").val() + "." + $("#ip3").val() + "." + $("#ip4").val();
@@ -293,13 +298,15 @@ function toTabletHandler(value) {
 // * activate
 function robotActivate() {
     console.log("Robot activate");
-    disabled = false;
+    robot.enable = true;
+    disabled = !robot.enable;
     $(".robot-input").prop("disabled", disabled);
 }
 
 // * deactivate
 function robotDeactivate() {
     console.log("Robot deactivate");
-    disabled = true;
+    robot.enable = false;
+    disabled = !robot.enable;
     $(".robot-input").prop("disabled", disabled);
 }

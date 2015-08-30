@@ -99,13 +99,17 @@ var updater = {
         var node = $("#robot-say-collection");
         node.empty();
 
+        disabled = !robot.enable;
+
         sayTexts = updater.notes[updater.slidePage - 1];
         sayTexts.forEach(function(element, index, array) {
-            console.log(index + ":" + element);
+            console.log(index + ":" + element + ", disabled:" + disabled);
             node.append("<li class='collection-item dismissable'>" +
                         "  <span id='saySlideText" + index + "'>" + element + "</span>" +
-                        "  <button class='secondary-content btn-floating center-align keyup white-text robot-input' onclick='animatedSay($(\"#saySlideText" + index + "\").text());'>Say</button>" +
-                        "</li>")
+                        "  <button id='saySlideText" + index + "-btn' class='secondary-content btn-floating center-align keyup white-text robot-input' onclick='animatedSay($(\"#saySlideText" + index + "\").text());'>Say</button>" +
+                        "</li>");
+            $("#saySlideText" + index + "-btn").prop("disabled", disabled);
+
         });
     }
 
