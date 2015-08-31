@@ -186,6 +186,6 @@ function newCommand(keyCode, slidePage) {
 // * animated say clicked
 function animatedSayClicked(value) {
     var node = $(value);
-    animatedSay(value);
+    animatedSay(node.text());
     node.parent().remove();
 }
