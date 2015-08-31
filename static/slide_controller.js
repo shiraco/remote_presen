@@ -28,7 +28,7 @@ var updater = {
         }
 
         var timestamp = Math.floor(Date.now() / 1000);
-        var sourceUrl = "https://gist.githubusercontent.com/shiraco/fd363f27a5126a5e951e/raw/" + "?timestamp=" + timestamp;
+        var sourceUrl = "https://gist.githubusercontent.com/shiraco/d9d1b13e38bcd99f65a0/raw/" + "?timestamp=" + timestamp;
 
         $.get(sourceUrl, function(res) {
             sourceMd = res;
