@@ -281,13 +281,13 @@ function sleepSwitch(bl) {
 }
 
 // * raise event
-function qimessagingMemoryEvent() {
+function qimessagingMemoryEvent(key) {
     console.log("raise event: Hey");
     updater.action = "Robot raise event: " + "Hey";
     updater.showMessage(updater.action);
 
     if (self.alMemory) {
-        self.alMemory.raiseEvent("PepperQiMessaging/Hey", "1");
+        self.alMemory.raiseEvent(key, "1");
     }
 }
 
