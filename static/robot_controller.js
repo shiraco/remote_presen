@@ -14,7 +14,20 @@ var robot = {
 }
 
 // # connect
-function connect() {
+// * connectByIp
+function connectByIp() {
+    var robotIp = $("#ip1").val() + "." + $("#ip2").val() + "." + $("#ip3").val() + "." + $("#ip4").val();
+    connect(robotIp);
+}
+
+// * connectByHostname
+function connectByHostname() {
+    var robotIp = $("#hostname").val();
+    connect(robotIp);
+}
+
+// * connect
+function connect(robotIp) {
     var robotIp = $("#ip1").val() + "." + $("#ip2").val() + "." + $("#ip3").val() + "." + $("#ip4").val();
     console.log("connecting... " + robotIp);
 
