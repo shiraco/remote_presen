@@ -94,6 +94,7 @@ var updater = {
             if (updater.retry_attempts < updater.max_retry_attempts) {
                 // Connection has closed so try to reconnect.
                 updater.retry_attempts++;
+                slideDeactivate();
                 updater.socket = null;
                 updater.start();
                 console.log("retry_attempts: ", updater.retry_attempts);
@@ -107,6 +108,8 @@ var updater = {
         // * socket onerror
         updater.socket.onerror = function(event) {
             console.log("onerror");
+            slideDeactivate();
+
         }
 
     },
