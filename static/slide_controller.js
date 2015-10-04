@@ -15,6 +15,8 @@ var updater = {
     slidePage: null,
     notes: null,
     action: null,
+    retry_attempts: 0,
+    max_retry_attempts: 120,
 
     // * start
     start: function() {
@@ -69,6 +71,11 @@ var updater = {
 
         });
 
+        // * socket open
+        updater.socket.onopen = function() {
+            console.log("onopen");
+        };
+
         // * socket onmessage
         updater.socket.onmessage = function(event) {
             var json = JSON.parse(event.data);
@@ -77,7 +84,30 @@ var updater = {
             updater.showMessage(updater.action);
             updater.showSlideNav(updater.slidePage);
             updater.showSayText();
+        };
+
+        // * socket close
+        updater.socket.onclose = function(event) {
+            console.log("onclose. reason: %s", event.reason);
+
+            if (updater.retry_attempts < updater.max_retry_attempts) {
+                // Connection has closed so try to reconnect.
+                updater.socket = null;
+                updater.start();
+                updater.retry_attempts++;
+                console.log("retry_attempts: ", updater.retry_attempts);
+
+            } else {
+                console.log("websocket closed by over max_retry_attempts: ", updater.retry_attempts);
+
+            }
+        };
+
+        // * socket onerror
+        updater.socket.onerror = function(event) {
+            console.log("onerror");
         }
+
     },
 
     // * update message
