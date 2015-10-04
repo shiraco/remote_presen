@@ -4,8 +4,6 @@ $(document).ready(function() {
     if (!window.console.log) window.console.log = function() {};
 
     slideDeactivate();
-    $("#sender").keyup(callback);
-
     updater.start();
 });
 
@@ -149,20 +147,6 @@ var updater = {
 
 };
 
-// # callback
-var callback = function(e) {
-    // console.log(e.type, e);
-    var text = e.type;
-    var code = e.which ? e.which : e.keyCode;
-    if (13 === code) {
-        text += ": ENTER";
-
-    } else {
-        text += ": keycode " + code;
-    }
-    console.log("callback: " + text);
-};
-
 // # button activate & deactivate
 // * activate
 function slideActivate() {
@@ -183,9 +167,7 @@ function slideDeactivate() {
 function leftButtonClicked() {
     var code = 37;  // Left
     updater.action = "Previous Slide";
-    $("#sender").trigger(
-        $.Event("keyup", {keyCode: code, which: code})
-    );
+
     if (updater.slidePage > 1) {
         updater.slidePage--;
         newCommand(code, updater.slidePage);
@@ -198,9 +180,7 @@ function leftButtonClicked() {
 function rightButtonClicked() {
     var code = 39;  // Right
     updater.action = "Next Slide";
-    $("#sender").trigger(
-        $.Event("keyup", {keyCode: code, which: code})
-    );
+
     if (updater.slidePage < slideTotalPages) {
         updater.slidePage++;
         newCommand(code, updater.slidePage);
