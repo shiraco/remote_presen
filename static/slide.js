@@ -31,6 +31,7 @@ var updater = {
             updater.socket.onmessage = function(event) {
                 var json = JSON.parse(event.data);
                 console.log("onmessage: " + "{keyCode: " + json['keyCode'] + ", slidePage: " + json['slidePage'] + "}");
+                updater.retry_attempts = 0;
 
                 // change page
                 changePageTo(json["slidePage"]);
@@ -42,9 +43,9 @@ var updater = {
 
                 if (updater.retry_attempts < updater.max_retry_attempts) {
                     // Connection has closed so try to reconnect.
+                    updater.retry_attempts++;
                     updater.socket = null;
                     updater.start();
-                    updater.retry_attempts++;
                     console.log("retry_attempts: ", updater.retry_attempts);
 
                 } else {

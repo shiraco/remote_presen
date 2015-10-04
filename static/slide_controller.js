@@ -80,6 +80,8 @@ var updater = {
             var json = JSON.parse(event.data);
             console.log("onmessage: " + json["keyCode"]);
 
+            updater.retry_attempts = 0;
+
             updater.showMessage(updater.action);
             updater.showSlideNav(updater.slidePage);
             updater.showSayText();
@@ -91,9 +93,9 @@ var updater = {
 
             if (updater.retry_attempts < updater.max_retry_attempts) {
                 // Connection has closed so try to reconnect.
+                updater.retry_attempts++;
                 updater.socket = null;
                 updater.start();
-                updater.retry_attempts++;
                 console.log("retry_attempts: ", updater.retry_attempts);
 
             } else {
