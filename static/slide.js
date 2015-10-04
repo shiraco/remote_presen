@@ -40,8 +40,6 @@ var updater = {
             updater.socket.onclose = function(event) {
                 console.log("onclose. reason: %s", event.reason);
 
-                var time = updater.generateInterval(updater.attempts);
-
                 if (updater.retry_attempts < updater.max_retry_attempts) {
                     // Connection has closed so try to reconnect.
                     updater.socket = null;
