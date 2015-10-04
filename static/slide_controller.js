@@ -12,7 +12,7 @@ $(document).ready(function() {
 // # updater
 var updater = {
     socket: null,
-    slidePage: null,
+    slidePage: 1,
     notes: null,
     action: null,
     retry_attempts: 0,
@@ -23,7 +23,6 @@ var updater = {
         var protocol = ("https:" == location.protocol) ? "wss:" : "ws:"
         var url = protocol + "//" + location.host + "/ws";
         updater.socket = new WebSocket(url);
-        updater.slidePage = 1;
 
         if (!Date.now) {
             Date.now = function() {return new Date().getTime();}
