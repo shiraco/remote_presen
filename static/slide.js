@@ -114,10 +114,10 @@ var callback = function(e) {
     if ("#" == currentHash.charAt(0)) {
 
       if ("p" == currentHash.charAt(1)) {
-          currentPage = parseInt(hash.substring(2), 10);
+          currentPage = parseInt(currentHash.substring(2), 10);
 
       } else {
-          currentPage = parseInt(hash.substring(1), 10);
+          currentPage = parseInt(currentHash.substring(1), 10);
 
       }
 
