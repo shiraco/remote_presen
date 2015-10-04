@@ -96,7 +96,8 @@ function changePageTo(toPage) {
 
 }
 
-// # callback
+// # slide action from self
+// * callback
 var callback = function(e) {
     console.log(e.type, e);
 
