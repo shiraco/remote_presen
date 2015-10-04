@@ -33,7 +33,7 @@ var updater = {
                 console.log("onmessage: " + "{keyCode: " + json['keyCode'] + ", slidePage: " + json['slidePage'] + "}");
 
                 // change page
-                buttonClicking(json["keyCode"], json["slidePage"]);
+                changePageTo(json["slidePage"]);
             };
 
             // * socket close
@@ -64,55 +64,30 @@ var updater = {
 };
 
 // # slide action from client
-// * button handler
-function buttonClicking(keyCode, slidePage) {
-
-    switch (keyCode) {
-        case 37:
-            moveLeft(slidePage);
-            break;
-
-        case 39:
-            moveRight(slidePage);
-            break;
-    }
-
-}
-
-// * to next page
-function moveRight(slidePage) {
-    changePageTo(+1, slidePage);
-}
-
-// * to previous page
-function moveLeft(slidePage) {
-    changePageTo(-1, slidePage);
-}
-
 // * common changePageTo
-function changePageTo(movePages, toPage) {
-    hash = location.hash;
+function changePageTo(toPage) {
+    currentHash = location.hash;
 
-    if("#" == hash.charAt(0)) {
-        currentPage = parseInt(hash.substring(1), 10);
-        pMode = false;
+    if ("#" == currentHash.charAt(0)) {
 
-        if("p" == hash.charAt(0)) {
-            currentPage = parseInt(hash.substring(1), 10);
-            pMode = true;
-        }
+      if ("p" == currentHash.charAt(1)) {
+          pMode = true;
+
+      } else {
+          pMode = false;
+
+      }
 
     } else {
         return false;
 
     };
 
-    // next = currentPage + movePages;
     var nextPage = toPage;
     var nextHash  = "#" + (pMode ? "p" : "") + nextPage;
 
     if (nextHash) {
-        console.log("change page to: " + nextHash);
+        console.log("change page from: " + currentHash + " to: " + nextHash);
         location.hash = nextHash;
 
     }
@@ -124,12 +99,36 @@ function changePageTo(movePages, toPage) {
 // # callback
 var callback = function(e) {
     console.log(e.type, e);
+
     var text = e.type;
-    var code = e.which ? e.which : e.keyCode;
-    if (13 === code) {
+    var keyCode = e.which ? e.which : e.keyCode;
+    if (13 === keyCode) {
         text += ": ENTER";
     } else {
-        text += ": keycode "+ code;
+        text += ": keycode "+ keyCode;
     }
+
     console.log(text);
+
+    currentHash = location.hash;
+
+    if ("#" == currentHash.charAt(0)) {
+
+      if ("p" == currentHash.charAt(1)) {
+          currentPage = parseInt(hash.substring(2), 10);
+
+      } else {
+          currentPage = parseInt(hash.substring(1), 10);
+
+      }
+
+    } else {
+        return false;
+
+    };
+
+    // send command
+    var message = {keyCode: keyCode, slidePage: currentPage};
+    updater.socket.send(JSON.stringify(message));
+
 };
