@@ -8,7 +8,6 @@ import tornado.web
 import tornado.websocket
 import tornado.escape
 import tornado.autoreload
-from tornado.options import define, options
 import logging
 
 

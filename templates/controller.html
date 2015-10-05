@@ -1,266 +1,290 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{ static_url('controller.css') }}" type="text/css"/>
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  </head>
+<head>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{{ static_url('controller.css') }}" type="text/css" />
 
-  <body>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+</head>
 
-    <!-- nav bar -->
-    <div class="navbar-fixed">
-      <nav>
-        <div class="nav-wrapper grey darken-4">
-          <a href="#!" class="brand-logo">Robot Presen</a>
-          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-            <li><a href="#!"><i class="material-icons">refresh</i></a></li>
-            <li><a href="#!"><i class="material-icons">settings</i></a></li>
-          </ul>
-          <ul class="side-nav" id="mobile-demo">
-            <li><a href="#!"><i class="material-icons left">refresh</i>refresh</a></li>
-            <li><a href="#!"><i class="material-icons left">settings</i>settings</a></li>
-          </ul>
-        </div>
-      </nav>
+<body>
+
+  <!-- nav bar -->
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper grey darken-4">
+        <a href="#!" class="brand-logo">Robot Presen</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#!"><i class="material-icons">refresh</i></a></li>
+          <li><a href="#!"><i class="material-icons">settings</i></a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="#!"><i class="material-icons left">refresh</i>refresh</a></li>
+          <li><a href="#!"><i class="material-icons left">settings</i>settings</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <!-- tab menu -->
+  <div class="top-container">
+    <div class="row">
+      <div class="pinned col s12">
+        <ul class="tabs">
+          <li class="tab col s4"><a class="active" href="#tab1">Slide</a></li>
+          <li class="tab col s4"><a href="#tab2">Robot</a></li>
+          <li class="tab col s4"><a href="#tab3">Settings</a></li>
+        </ul>
+      </div>
     </div>
 
-    <!-- tab menu -->
-    <div class="top-container">
-      <div class="row">
-        <div class="pinned col s12">
-          <ul class="tabs">
-            <li class="tab col s4"><a class="active" href="#tab1">Slide</a></li>
-            <li class="tab col s4"><a href="#tab2">Robot</a></li>
-            <li class="tab col s4"><a href="#tab3">Settings</a></li>
-          </ul>
+  </div>
+
+  <div class="container">
+    <!-- common menu -->
+    <div class="col s12">
+      <div id="tab0">
+        <div class="section">
+          <h5>Message</h5>
+          <span id="sender"></span>
+          <span id="message">　</span>
         </div>
       </div>
-
     </div>
 
-    <div class="container">
-      <!-- common menu -->
-      <div class="col s12">
-        <div id="tab0">
-          <div class="section">
-            <h5>Message</h5>
-            <span id="sender"></span>
-            <span id="message">　</span>
+    <div class="divider"></div>
+
+    <!-- tab1 menu -->
+    <div id="tab1">
+
+      <div class="section">
+        <h5>Slide Controller</h5>
+        <div class="row">
+          <div class="col s12">
+            <span id="slide-nav"></span>
+          </div>
+          <div class="col s6 m3 l2 center-align">
+            <button class="center-align keyup white-text btn-large light-blue darken-1 waves-effect waves-light slide-input" onclick="leftButtonClicked();"><i class="large material-icons">skip_previous</i></button>
+          </div>
+          <div class="col s6 m3 l2 center-align">
+            <button class="center-align keyup white-text btn-large light-blue darken-1 waves-effect waves-light slide-input" onclick="rightButtonClicked();"><i class="large material-icons">skip_next</i></buttton>
           </div>
         </div>
       </div>
 
       <div class="divider"></div>
 
-      <!-- tab1 menu -->
-      <div id="tab1">
-
-        <div class="section">
-          <h5>Slide Controller</h5>
-          <div class="row">
-            <div class="col s12"><span id="slide-nav"></span></div>
-            <div class="col s6 m3 l2 center-align">
-              <button class="center-align keyup white-text btn-large light-blue darken-1 waves-effect waves-light slide-input" onclick="leftButtonClicked();"><i class="large material-icons">skip_previous</i></button>
-            </div>
-            <div class="col s6 m3 l2 center-align">
-              <button class="center-align keyup white-text btn-large light-blue darken-1 waves-effect waves-light slide-input" onclick="rightButtonClicked();"><i class="large material-icons">skip_next</i></buttton>
-            </div>
-          </div>
+      <div class="section">
+        <h5>Robot Say</h5>
+        <div class="row">
+          <ul id="robot-say-collection" class="collection col s12">
+            <li class="collection-item dismissable">
+              <span id="saySlideText1">わたしはPepperです</span>
+              <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSayClicked('#saySlideText1');">Say</button>
+            </li>
+            <li class="collection-item dismissable">
+              <span id="saySlideText2">今日は天気のことをはなします</span>
+              <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSayClicked('#saySlideText2');">Say</button>
+            </li>
+            <li class="collection-item dismissable">
+              <span id="saySlideText3">私は人工知能でお話します</span>
+              <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSayClicked('#saySlideText3');">Say</button>
+            </li>
+            <li class="collection-item dismissable">
+              <span id="saySlideText4">こんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわ</span>
+              <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSayClicked('#saySlideText4');">Say</button>
+            </li>
+          </ul>
         </div>
-
-        <div class="divider"></div>
-
-        <div class="section">
-          <h5>Robot Say</h5>
-          <div class="row">
-            <ul id="robot-say-collection" class="collection col s12">
-              <li class="collection-item dismissable">
-                <span id="saySlideText1">わたしはPepperです</span>
-                <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSayClicked('#saySlideText1');">Say</button>
-              </li>
-              <li class="collection-item dismissable">
-                <span id="saySlideText2">今日は天気のことをはなします</span>
-                <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSayClicked('#saySlideText2');">Say</button>
-              </li>
-              <li class="collection-item dismissable">
-                <span id="saySlideText3">私は人工知能でお話します</span>
-                <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSayClicked('#saySlideText3');">Say</button>
-              </li>
-              <li class="collection-item dismissable">
-                <span id="saySlideText4">こんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわこんにちはおはようこんにちはこんばんわ</span>
-                <button class="secondary-content btn-floating center-align keyup white-text robot-input" onclick="animatedSayClicked('#saySlideText4');">Say</button>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- tab2 menu -->
-      <div id="tab2">
-
-        <div class="section">
-          <h5>Robot Motion</h5>
-          <div class="row">
-            <div class="col s12 center-align">
-              <div class="col s4 m3 l2 center-align">
-                <button class="center-align keyup white-text btn-large red darken-3 waves-effect waves-light robot-input" onclick="move(0);">◀</button>
-              </div>
-              <div class="col s4 m3 l2 center-align">
-                <div class="center-align">
-                  <button class="center-align keyup white-text btn red darken-3 waves-effect waves-light robot-input" onclick="move(2);">▲</button>
-                </div>
-                <div class="center-align">
-                  <button class="center-align keyup white-text btn-flat white robot-input" onclick="move(4);"></button>
-                </div>
-                <div class="center-align">
-                  <button class="center-align keyup white-text btn red darken-3 waves-effect waves-light robot-input" onclick="move(3);">▼</button>
-                </div>
-              </div>
-              <div class="col s4 m3 l2 center-align">
-                <button class="center-align keyup white-text btn-large red darken-3 waves-effect waves-light robot-input" onclick="move(1);">▶</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section">
-          <h5>ALMemory Event</h5>
-          <div class="row">
-            <div class="col s12">
-      		    <button onclick="qimessagingMemoryEvent('PepperQiMessaging/Hey')" class="btn btn-info waves-effect waves-light robot-input">PepperQiMessaging/Hey</button>
-            </div>
-            <div class="col s12">
-      		    <button onclick="qimessagingMemoryEvent('EmotionalNao/Start')" class="btn btn-info waves-effect waves-light robot-input">EmotionalNao/Start</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section">
-          <h5>Robot Say</h5>
-          <div class="row">
-            <ul class="collection col s12">
-              <li class="collection-item">
-                <div class="input-field col s10 m11 l11">
-                  <input id="sayText" class="robot-input" type="text" value="こんにちは">
-                  <label for="sayText">say text</label>
-                </div>
-                <div class="col s2 m1 l1">
-                  <button class="center-align secondary-content btn-floating teal waves-effect waves-light robot-input" onclick="animatedSay($('#sayText').val())">Say</button>
-                  <button class="center-align secondary-content btn-flat white white-text blue-text" onclick="" disabled="disabled"></button>
-                  <button class="center-align secondary-content btn-floating teal lighten-5 blue-text waves-effect waves-light robot-input" onclick="say($('#sayText').val())">Say</button>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- tab3 menu -->
-      <div id="tab3">
-
-        <div class="section">
-          <h5>Robot IP Address</h5>
-          <div class="row">
-            <form class="col s12 m12 l6">
-              <div class="input-field col s1"></div>
-              <div class="input-field col s2"><input id="ip1" type="text" pattern="\d{1,3}\" class="validate" value="192"></div>
-              <div class="input-field col s2"><input id="ip2" type="text" pattern="\d{1,3}\" class="validate" value="168"></div>
-              <div class="input-field col s2"><input id="ip3" type="text" pattern="\d{1,3}\" class="validate" value="0"></div>
-              <div class="input-field col s2"><input id="ip4" type="text" pattern="\d{1,3}\" class="validate" value="3"></div>
-              <div class="input-field col s2"><a class="center-align keyup white-text waves-effect waves-light btn" onclick="connect();"><i class="large material-icons">power_settings_new</i></a></div>
-              <div class="input-field col s1"></div>
-            </form>
-
-            <form class="col s12 m12 l6">
-              <div class="input-field col s1"></div>
-              <div class="input-field col s8"><input id="hostname" type="text" value="nao.local"></div>
-              <div class="input-field col s2"><a class="center-align keyup white-text waves-effect waves-light btn" onclick="connectByHostname();"><i class="large material-icons">power_settings_new</i></a></div>
-              <div class="input-field col s1"></div>
-            </form>
-
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section">
-          <h5 class="col">Voice Volume</h5>
-          <div class="row">
-            <div class="col s2 m1 l1 center-align"><button class="center-align white robot-input btn-floating z-depth-0" onclick="changeAudioVolume(0)"><i class="material-icons teal-text">volume_mute</i></button></div>
-            <div class="col s2 m1 l1 center-align"><button class="center-align white robot-input btn-floating z-depth-0" onclick="changeAudioVolume(Number($('#volume').val()) - 5)"><i class="material-icons teal-text">volume_down</i></button></div>
-            <div class="col s6 m5 l3 center-align"><form action="#"><input type="range" id="volume" class="range-field robot-input" min="0" max="100" value="1" onchange="changeAudioVolume(Number($('#volume').val()))" /></form></div>
-            <div class="col s2 m1 l1 center-align"><button class="center-align white robot-input btn-floating z-depth-0" onclick="changeAudioVolume(Number($('#volume').val()) + 5)"><i class="material-icons teal-text">volume_up</i></button></div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section">
-          <h5>Autonomous</h5>
-          <div class="row">
-            <div class="switch">
-              <label>
-                Off
-                <input id="autonomousSwitch" class="robot-input" type="checkbox" onchange="autonomousSwitch($('#autonomousSwitch').is(':checked'))">
-                <span class="lever"></span>
-                On
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section">
-          <h5 class="col s12">Wake up / Sleep</h5>
-          <div class="row">
-            <div class="switch">
-              <label>
-                Off
-                <input checked id="sleepSwitch" class="robot-input" type="checkbox" onchange="sleepSwitch($('#sleepSwitch').is(':checked'))">
-                <span class="lever"></span>
-                On
-              </label>
-            </div>
-          </div>
-        </div>
-
       </div>
 
     </div>
 
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ static_url('slide_controller.js') }}"></script>
+    <!-- tab2 menu -->
+    <div id="tab2">
 
-    <!-- Compiled and minified JavaScript -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-    <script type="text/javascript">
-      $(".button-collapse").sideNav();
-    </script>
+      <div class="section">
+        <h5>Robot Motion</h5>
+        <div class="row">
+          <div class="col s12 center-align">
+            <div class="col s4 m3 l2 center-align">
+              <button class="center-align keyup white-text btn-large red darken-3 waves-effect waves-light robot-input" onclick="move(0);">◀</button>
+            </div>
+            <div class="col s4 m3 l2 center-align">
+              <div class="center-align">
+                <button class="center-align keyup white-text btn red darken-3 waves-effect waves-light robot-input" onclick="move(2);">▲</button>
+              </div>
+              <div class="center-align">
+                <button class="center-align keyup white-text btn-flat white robot-input" onclick="move(4);"></button>
+              </div>
+              <div class="center-align">
+                <button class="center-align keyup white-text btn red darken-3 waves-effect waves-light robot-input" onclick="move(3);">▼</button>
+              </div>
+            </div>
+            <div class="col s4 m3 l2 center-align">
+              <button class="center-align keyup white-text btn-large red darken-3 waves-effect waves-light robot-input" onclick="move(1);">▶</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <!--Import qimessaging-->
-    <script type="text/javascript" src="{{ static_url('libs/qimessaging/1.0/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ static_url('libs/qimessaging/1.0/qimessaging.js') }}"></script>
-    <script type="text/javascript" src="{{ static_url('robot_controller.js') }}"></script>
+      <div class="divider"></div>
 
-    <!-- marked -->
-    <script type="text/javascript" src="{{ static_url('bower_components/marked/marked.min.js') }}"></script>
+      <div class="section">
+        <h5>ALMemory Event</h5>
+        <div class="row">
+          <div class="col s12">
+            <button onclick="qimessagingMemoryEvent('PepperQiMessaging/Hey')" class="btn btn-info waves-effect waves-light robot-input">PepperQiMessaging/Hey</button>
+          </div>
+          <div class="col s12">
+            <button onclick="qimessagingMemoryEvent('EmotionalNao/Start')" class="btn btn-info waves-effect waves-light robot-input">EmotionalNao/Start</button>
+          </div>
+        </div>
+      </div>
 
-  </body>
+      <div class="divider"></div>
+
+      <div class="section">
+        <h5>Robot Say</h5>
+        <div class="row">
+          <ul class="collection col s12">
+            <li class="collection-item">
+              <div class="input-field col s10 m11 l11">
+                <input id="sayText" class="robot-input" type="text" value="こんにちは">
+                <label for="sayText">say text</label>
+              </div>
+              <div class="col s2 m1 l1">
+                <button class="center-align secondary-content btn-floating teal waves-effect waves-light robot-input" onclick="animatedSay($('#sayText').val())">Say</button>
+                <button class="center-align secondary-content btn-flat white white-text blue-text" onclick="" disabled="disabled"></button>
+                <button class="center-align secondary-content btn-floating teal lighten-5 blue-text waves-effect waves-light robot-input" onclick="say($('#sayText').val())">Say</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- tab3 menu -->
+    <div id="tab3">
+
+      <div class="section">
+        <h5>Robot IP Address</h5>
+        <div class="row">
+          <form class="col s12 m12 l6">
+            <div class="input-field col s1"></div>
+            <div class="input-field col s2">
+              <input id="ip1" type="text" pattern="\d{1,3}\" class="validate" value="192">
+            </div>
+            <div class="input-field col s2">
+              <input id="ip2" type="text" pattern="\d{1,3}\" class="validate" value="168">
+            </div>
+            <div class="input-field col s2">
+              <input id="ip3" type="text" pattern="\d{1,3}\" class="validate" value="0">
+            </div>
+            <div class="input-field col s2">
+              <input id="ip4" type="text" pattern="\d{1,3}\" class="validate" value="3">
+            </div>
+            <div class="input-field col s2"><a class="center-align keyup white-text waves-effect waves-light btn" onclick="connect();"><i class="large material-icons">power_settings_new</i></a></div>
+            <div class="input-field col s1"></div>
+          </form>
+
+          <form class="col s12 m12 l6">
+            <div class="input-field col s1"></div>
+            <div class="input-field col s8">
+              <input id="hostname" type="text" value="nao.local">
+            </div>
+            <div class="input-field col s2"><a class="center-align keyup white-text waves-effect waves-light btn" onclick="connectByHostname();"><i class="large material-icons">power_settings_new</i></a></div>
+            <div class="input-field col s1"></div>
+          </form>
+
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section">
+        <h5 class="col">Voice Volume</h5>
+        <div class="row">
+          <div class="col s2 m1 l1 center-align">
+            <button class="center-align white robot-input btn-floating z-depth-0" onclick="changeAudioVolume(0)"><i class="material-icons teal-text">volume_mute</i></button>
+          </div>
+          <div class="col s2 m1 l1 center-align">
+            <button class="center-align white robot-input btn-floating z-depth-0" onclick="changeAudioVolume(Number($('#volume').val()) - 5)"><i class="material-icons teal-text">volume_down</i></button>
+          </div>
+          <div class="col s6 m5 l3 center-align">
+            <form action="#">
+              <input type="range" id="volume" class="range-field robot-input" min="0" max="100" value="1" onchange="changeAudioVolume(Number($('#volume').val()))" />
+            </form>
+          </div>
+          <div class="col s2 m1 l1 center-align">
+            <button class="center-align white robot-input btn-floating z-depth-0" onclick="changeAudioVolume(Number($('#volume').val()) + 5)"><i class="material-icons teal-text">volume_up</i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section">
+        <h5>Autonomous</h5>
+        <div class="row">
+          <div class="switch">
+            <label>
+              Off
+              <input id="autonomousSwitch" class="robot-input" type="checkbox" onchange="autonomousSwitch($('#autonomousSwitch').is(':checked'))">
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section">
+        <h5 class="col s12">Wake up / Sleep</h5>
+        <div class="row">
+          <div class="switch">
+            <label>
+              Off
+              <input checked id="sleepSwitch" class="robot-input" type="checkbox" onchange="sleepSwitch($('#sleepSwitch').is(':checked'))">
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ static_url('slide_controller.js') }}"></script>
+
+  <!-- Compiled and minified JavaScript -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+  <script type="text/javascript">
+    $(".button-collapse").sideNav();
+  </script>
+
+  <!--Import qimessaging-->
+  <script type="text/javascript" src="{{ static_url('libs/qimessaging/1.0/jquery.min.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('libs/qimessaging/1.0/qimessaging.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('robot_controller.js') }}"></script>
+
+  <!-- marked -->
+  <script type="text/javascript" src="{{ static_url('bower_components/marked/marked.min.js') }}"></script>
+
+</body>
+
 </html>
