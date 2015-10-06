@@ -86,7 +86,7 @@ function connect(robotIp) {
 
 // * connectByIp
 function connectByIp() {
-  var robotIp = $("#ip1").val() + "." + $("#ip2").val() + "." + $("#ip3").val() + "." + $("#ip4").val();
+  var robotIp = "" + $("#ip1").val() + "." + $("#ip2").val() + "." + $("#ip3").val() + "." + $("#ip4").val();
   connect(robotIp);
 }
 
