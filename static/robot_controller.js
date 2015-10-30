@@ -96,6 +96,11 @@ function connectByHostname() {
   connect(robotIp);
 }
 
+// * connectByHostname
+function connectByHostname2() {
+  var robotIp = $("#hostname2").val();
+  connect(robotIp);
+}
 
 
 // # robot command
